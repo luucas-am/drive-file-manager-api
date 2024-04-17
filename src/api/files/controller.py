@@ -17,6 +17,10 @@ async def get_all(service=files_router.dependencies[0]):
 async def get_one(file_id: str, service=files_router.dependencies[0]):
     return FileService.get_one(service=service, file_id=file_id)
 
+@files_router.get('/{file_id}/download', status_code=200)
+async def download_one(file_id: str, local_filepath: str, service=files_router.dependencies[0]):
+    return FileService.download_one(service=service, file_id=file_id, local_filepath=local_filepath)
+
 @files_router.post('/', status_code=201)
 async def create_one(filename: str, filepath: str, service=files_router.dependencies[0]):
     return FileService.create_one(service=service, filename=filename, filepath=filepath)

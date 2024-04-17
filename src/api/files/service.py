@@ -1,6 +1,7 @@
+import io
 import json
 
-from googleapiclient.http import MediaFileUpload
+from googleapiclient.http import MediaFileUpload, MediaIoBaseDownload
 
 from src.errors.exceptions import BadRequestException, NotFoundException
 
@@ -18,6 +19,18 @@ class FileService:
             raise NotFoundException("File not found")
 
         return file
+    
+    def download_one(service, file_id, local_filepath):
+        request = service.files().get_media(fileId=file_id)  
+        fh = io.BytesIO()
+        downloader = MediaIoBaseDownload(fh, request)
+        done = False
+        while done is False:
+            status, done = downloader.next_chunk()
+
+        with open(local_filepath, 'wb') as f:
+            fh.seek(0)
+            f.write(fh.read())
     
     def create_one(service, filename, filepath):
         file_extension = filepath.split('.')[-1]
