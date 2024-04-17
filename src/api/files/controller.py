@@ -1,0 +1,26 @@
+from fastapi import APIRouter, Depends
+
+from src.constants import get_authenticated_service
+from src.api.files.service import FileService
+
+files_router = APIRouter(
+    prefix='/api/files',
+    tags=['Files'],
+    dependencies=[Depends(get_authenticated_service)]
+)
+
+@files_router.get('/', status_code=200)
+async def get_all(service=files_router.dependencies[0]):
+    return FileService.get_all(service=service)
+
+@files_router.get('/{file_id}', status_code=200)
+async def get_one(file_id: str, service=files_router.dependencies[0]):
+    return FileService.get_one(service=service, file_id=file_id)
+
+@files_router.post('/', status_code=201)
+async def create_one(filename: str, filepath: str, service=files_router.dependencies[0]):
+    return FileService.create_one(service=service, filename=filename, filepath=filepath)
+
+@files_router.delete('/{file_id}', status_code=200)
+async def delete_one(file_id: str, service=files_router.dependencies[0]):
+    return FileService.delete_one(service=service, file_id=file_id)

@@ -1,0 +1,21 @@
+{
+    ".docx": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    ".odt": "application/vnd.oasis.opendocument.text",
+    ".rtf": "application/rtf",
+    ".pdf": "application/pdf",
+    ".txt": "text/plain",
+    ".zip": "application/zip",
+    ".epub": "application/epub+zip",
+    ".xlsx": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    ".ods": "application/vnd.oasis.opendocument.spreadsheet",
+    ".csv": "text/csv",
+    ".tsv": "text/tab-separated-values",
+    ".pptx": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+    ".odp": "application/vnd.oasis.opendocument.presentation",
+    ".jpg": "image/jpeg",
+    ".jpeg": "image/jpeg",
+    ".png": "image/png",
+    ".gif": "image/gif",
+    ".svg": "image/svg+xml",
+    ".json": "application/vnd.google-apps.script+json"
+}
