@@ -3,4 +3,4 @@ env
 .vscode
 __pycache__
 pytest_cache
-token.pickle
+token.json

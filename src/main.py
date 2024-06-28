@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
 
 from src.api.files.controller import files_router
+from src.api.folders.controller import folders_router
 
 
 server = FastAPI(title="Google Drive Manipulation API", version="0.1.0")
@@ -22,3 +23,4 @@ async def redirect_to_docs():
     return RedirectResponse(url="/docs")
 
 server.include_router(files_router)
+server.include_router(folders_router)

@@ -50,6 +50,25 @@ class FileService:
             raise BadRequestException("Failed to upload file. Check path and file extension.")
         
         return file
+    
+    def create_one_in_folder(service, filename, filepath, parent_id):
+        file_extension = filepath.split('.')[-1]
+        mimetypes = json.loads(open("mimetypes.json").read())
+
+        try:
+            mimetype = mimetypes[f".{file_extension}"]
+
+            file_metadata = {
+                'name': filename,
+                'parents': [parent_id]
+            }
+            media = MediaFileUpload(filepath, mimetype=mimetype)
+
+            file = service.files().create(body=file_metadata, media_body=media, fields='id').execute()
+        except:
+            raise BadRequestException("Failed to upload file. Check path and file extension.")
+        
+        return file
         
     def delete_one(service, file_id):
         file = service.files().delete(fileId=file_id).execute()
