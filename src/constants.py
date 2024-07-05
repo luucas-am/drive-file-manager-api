@@ -19,7 +19,10 @@ def get_authenticated_service():
         cred = Credentials.from_authorized_user_file(CREDENTIALS_FILE, SCOPES)
     if not cred or not cred.valid:
         if cred and cred.expired and cred.refresh_token:
-            cred.refresh(Request())
+            try:
+                cred.refresh(Request())
+            except Exception:
+                cred = generate_credentials()
         else:
             cred = generate_credentials()
 
